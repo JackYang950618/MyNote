@@ -102,4 +102,5 @@ public void Test(ServletRequest request, ServletResponse response){
        String age=json.get("age");==>24
        
        
-	 
+	 获取当前网页的地址（服务器也适用）
+  return window.location.pathname.replace("/","").replace(项目名称,"").replace("/","");
