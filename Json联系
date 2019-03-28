@@ -1,0 +1,42 @@
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
+public class JsonObejecTest {
+    public static void main(String args[]){
+        String json="{\"TOKEN\":\"b297f26965774abf9405ab471c679d85\",\"ICS\":{\"MESSAGE_ID\":\"WXBA4AI2019000930\",\"MESSAGE_FORMAT\":\"json\",\"MESSAGE_TYPE\":\"ICS_ORDERS\",\"COMPRRESS\":\"0\",\"SEND_DATE\":\"2019-03-27 11:01:33\",\"SEND_SYS\":\"OMS\",\"SENDER\":\"0001\",\"RECEIVE_SYS\":\"ICS\",\"RECEIVER\":\"00001\",\"REMARK\":\"\",\"DATA\":[{\"ORDER_INFO\":[{\"ORDER_NO\":\"WXBA4AI2019000930\",\"TRUST_CUSTOMER_ID\":\"C83DB74F-4BC7-4E6C-B11B-B8A049B90796\",\"DELIVERY_CUSTOMER_ID\":\"\",\"RECEIVING_CUSTOMER_ID\":\"58561940-E453-4BE6-A539-726647D8EAA5\",\"PAYMENT_SOLUTION\":\"CQS1809280001\",\"FREIGHT_FLOW\":\"001\",\"SERVICE_TYPE\":\"500\",\"PM_TEAM_ID\":\"6ABB73D7-7AB8-4B78-BE08-FFDF5C8DD5CF\",\"CUSTOMER_BU\":\"\",\"ORDER_RECIEVER\":\"D2C3A870-6419-4038-8606-C5E10CA7A172\",\"ORDER_MAKER\":\"D2C3A870-6419-4038-8606-C5E10CA7A172\",\"ORDER_OPERATOR\":\"D2C3A870-6419-4038-8606-C5E10CA7A172\",\"IS_URGENT\":\"1\",\"CNAME\":\"黄金\",\"ENAME\":\"gold\",\"ENAME_SUM\":1,\"CONTRACT_NO\":\"111\",\"INVOICE_NO\":\"111\",\"CUSTOM_ORDER_NO\":\"11\",\"COUNT\":111,\"WEIGHT\":111,\"VOLUME\":11,\"VOLUME_WEIGHT\":1837,\"CHARGING_WEIGHT\":1837,\"TOTAL_MONEY\":111,\"MONEY_TYPE\":\"300\",\"TRANSPORT_TYPE\":\"\",\"GOODS_ATTR\":\"101|109|107\",\"DATE_REQUIRED\":\"2019-03-27 10:59:00\",\"ORDER_GOODS_PACK\":[{\"ORDER_NO\":\"WXBA4AI2019000930\",\"COUNT\":111,\"PACKING_TYPE\":\"100\",\"X\":2,\"Y\":2,\"Z\":2,\"CAN_SUPER_POSITION\":\"200\",\"SUPER_POSITION_COUNT\":1,\"PIECE_WEIGHT\":9999999.999,\"IS_NON_STANDARD\":\"200\",\"IPPC\":\"1111111111111\"}],\"ORDER_CARGO_VALUE\":[{\"ORDER_NO\":\"WXBA4AI2019000930\",\"CARGO_VALUE\":111,\"currency\":\"300\"},{\"ORDER_NO\":\"WXBA4AI2019000930\",\"CARGO_VALUE\":111,\"currency\":\"300\"}]}],\"ORDER_LOADING_BILL\":[{\"ORDER_NO\":\"WXBA4AI2019000930\",\"BILL_TYPE\":\"01\",\"CHILD_BILL_TYPE\":\"0101\",\"BILL_NO\":\"111111111\",\"CHILD_BILL_NO\":\"111111\",\"TO_OFF_DATE\":\"2019-03-28 11:00:00\"}],\"ORDER_ICS_SERVICE\":[{\"ORDER_NO\":\"WXBA4AI2019000930\",\"PROPOSER\":\"D2C3A870-6419-4038-8606-C5E10CA7A172\",\"DEPARTMENT_ID\":\"6ABB73D7-7AB8-4B78-BE08-FFDF5C8DD5CF\",\"INSURANT\":\"58561940-E453-4BE6-A539-726647D8EAA5\",\"GOODS_NAME\":\"黄金\",\"CARGO_TYPE\":\"1\",\"PACKAGE_NUMBER\":111,\"PACKAGE_WEIGHT\":111,\"ACTUAL_CARRIER\":\"1,2,3\",\"BEAR_FEES\":\"第三方\",\"INTERNATIONAL_TRANSPORT_TYPE\":\"001\",\"INLAND_TRANSPORT_TYPE\":\"200002\",\"FROM_CITY\":\"无锡\",\"PICK_DATETIME\":\"2019-03-27 11:00:00\",\"TO_CITY\":\"想过\",\"FEE_COST_TYPE\":\"2\",\"SHIP_NAME\":\"cocos\",\"SAIL_NUM\":\"1111\",\"FLIGHT_NUM\":\"222\",\"TRANS_NO\":\"111\",\"CAR_NO\":\"1111111111\",\"Y_HT_GOODS\":\"0\",\"POLICY_REQUIREMENTS\":\"2\",\"ADDITIONAL_INSURANCE_TYPE\":\"1\",\"ADDITIONAL_INSURANCE_NAME\":\"\"}]}]}}";
+       //字符串json===>JSONObject
+        JSONObject jsonObject=JSONObject.fromString(json);
+//        System.out.println(jsonObject);
+        //根据键获取ICS对象
+        JSONObject ICS=jsonObject.getJSONObject("ICS");
+//        System.out.println(ICS);
+        //根据键获取DATA数组
+        JSONArray jsonArray=ICS.getJSONArray("DATA");
+//        System.out.println(jsonArray);
+        //获取里面的对象,只有一个
+        JSONObject jsonObject1=jsonArray.getJSONObject(0);
+//        System.out.println(jsonObject1);
+        //获取ORDER_ICS_SERVICE
+        JSONArray ORDER_ICS_SERVICEArray=jsonObject1.getJSONArray("ORDER_ICS_SERVICE");
+//        System.out.println(ORDER_ICS_SERVICEArray);
+        //获取ORDER_ICS_SERVICEArray里面的对象
+        for (int x=0;x<ORDER_ICS_SERVICEArray.length();x++){
+            JSONObject ORDER_ICS_SERVICE=null;
+            ORDER_ICS_SERVICE=ORDER_ICS_SERVICEArray.getJSONObject(x);
+//            System.out.println(ORDER_ICS_SERVICE);
+            //获取里面的值 例如 DEPARTMENT_ID
+            String DEPARTMENT_ID=ORDER_ICS_SERVICE.getString("DEPARTMENT_ID");
+//            System.out.println(DEPARTMENT_ID);
+        }
+        //获取ORDER_INFO
+        JSONArray ORDER_INFOArray=jsonObject1.getJSONArray("ORDER_INFO");
+        JSONObject ORDER_INFO=ORDER_INFOArray.getJSONObject(0);
+        JSONArray ORDER_CARGO_VALUEArray=ORDER_INFO.getJSONArray("ORDER_CARGO_VALUE");
+        for (int y=0;y<ORDER_CARGO_VALUEArray.length();y++){
+            JSONObject ORDER_CARGO_VALUE=null;
+            ORDER_CARGO_VALUE=ORDER_CARGO_VALUEArray.getJSONObject(y);
+            System.out.println(ORDER_CARGO_VALUE);
+        }
+    }
+}
