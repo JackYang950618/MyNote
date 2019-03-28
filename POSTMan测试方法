@@ -1,0 +1,1 @@
+使用PostMan 接口测试 1填写url 2Head Content-Type application/json  3 Body==》选择Raw 填写要测试的数据报文(json对象) 即可
