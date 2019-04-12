@@ -1,0 +1,34 @@
+需要 apache APR APR-util、prce 
+1首先 tar -zxvf 解压缩
+2安装Gcc：yum install gcc 安装C++编译器：yum install gcc-c++
+3安装APR：进入解压后APR文件夹：cd apr-1.5.2 安装前校验：./configure --prefix=/usr/local/apr make  make install 
+4 安装apr-util： 进入解压后的apr-util文件夹：cd apr-util-1.5.4
+安装前校验：./confiure --prefix=/usr/local/apr-util --with-apr=/usr/local/apr
+编译：make 安装：make install
+5安装pcre： 进入解压后的pcre文件夹：cd pcre-8.35
+安装前校验：./configure --prefix=/usr/local/pcre
+编译：make 安装：make instal
+6 安装apache： 进入解压后的apache文件夹：cd httpd-2.4.25
+  安装前校验：./configure --prefix=/usr/local/apache2 --enable-module=shared --with-apr=/usr/local/apr/ --with-apr-util=/usr/local/apr-util/ --with-pcre=/usr/local/pcre
+  编译：make
+  安装：make install
+	谨记：在 httpd.conf 修改两处
+ 1: 添加 ServerName localhost:80 端口支持
+ 2: 添加  对.php编译支持
+      AddType application/x-compress .Z
+       AddType application/x-gzip .gz .tgz
+     AddType application/x-httpd-php4 .php7
+     AddType application/x-httpd-php7-source .phps
+     AddType application/x-httpd-php .php
+     AddType application/x-httpd-php-source .phps
+	7启动，重启和停止 ，先切换到安装完成后的目录/usr/local/apache2/bin
+./apachectl -k start
+./apachectl -k restart
+./apachectl -k stop
+ 8 安装php
+ 1建立目标文件夹mkdir /usr/local/php
+ 2./configure --prefix=/usr/local/php  --with-apxs2=/usr/local/apache/bin/apxs
+ yum install libxml2  yum install libxml2-devel
+ 编译：make编译测试：make test编译安装：make install
+ 谨记:在/etc 添加php配置文件 php.ini
+
