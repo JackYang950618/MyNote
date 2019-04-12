@@ -1,0 +1,9 @@
+导出
+1 连接服务器 (putty以此)
+2 进入mysql的bin目录 cd /usr/local/mysql/bin
+3 执行语句 mysqldump -u root -p 导出的数据库名 > /usr/databasesfileback/文件名.sql
+
+导入
+1连接mysql mysql -u用户名 -p;
+2 use 要导入数据库名
+3 soucre 要导入文件的路径
