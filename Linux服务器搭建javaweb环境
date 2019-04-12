@@ -1,0 +1,54 @@
+需要配置 jdk tomcat mysql
+安装时使用 tar -zxvf 压缩文件 (根据压缩包的格式)
+1安装jdk yumsearch java|grep jdk   /选择1.7版本进行安装[root@localhost ~]#yuminstalljava-1.7.0-openjdk 
+/安装完之后，默认的安装目录是在: /usr/lib/jvm/java-1.7.0-openjdk-1.7.0.75.x86_64
+[root@localhost ~]#vi/etc/profile 
+#set java environment
+JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk-1.7.0.75.x86_64
+JRE_HOME=$JAVA_HOME/jre
+CLASS_PATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib
+PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
+export JAVA_HOME JRE_HOME CLASS_PATH PATH
+
+2安装tomcat 
+注意  配置防火墙，开放8080端口
+查看打开端口命令
+/etc/init.d/iptables status
+ 关闭防火墙命令
+/etc/init.d/iptables stop
+停止服务命令
+ service iptables stop 
+ 查看防火墙信息命令
+/etc/init.d/iptables status
+开放端口:8080命令
+/sbin/iptables -I INPUT -p tcp --dport 8080 -j ACCEPT
+重启防火墙以便改动生效:(或者直接重启系统)
+/etc/init.d/iptables restart
+将更改进行保存
+/etc/rc.d/init.d/iptables save
+另外直接在/etc/sysconfig/iptables中增加一行：
+-A RH-Firewall-1-INPUT -m state –state NEW -m tcp -p tcp –dport 8080 -j ACCEPT
+永久关闭防火墙命令
+chkconfig –level 35 iptables off (此方法源自网络，未实验，安全考虑拒绝使用此方法)
+
+3 安装mysql
+先删除服务器自带的
+问题1:Starting MySQLCouldn't find MySQL server (/usr/local/mysql/[失败]ysqld_safe)
+解决:#复制解压后的mysql目录 cp -r mysql /usr/local
+问题2:mysql端口开放
+inux mysql授权远程连接----连接navicat
+mysql -u root -password
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%'WITH GRANT OPTION 
+FLUSH PRIVILEGES 
+mysql>EXIT 
+打开3306端口开放
+iptables -A INPUT -p tcp --dport 3306 -j ACCEPT
+flush privileges;
+关于防火墙：一般开发测试都把防火墙关闭
+
+su root
+service iptables stop #关闭防火墙
+service iptables status #验证是否关闭
+chkconfig iptables off #关闭防火墙的开机自动运行
+chkconfig –list | grep iptables #验证防火墙的开机自动运行
+vim /etc/sysconfig/selinux # 禁用selinux，将SELINUX=disabled
