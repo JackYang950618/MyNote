@@ -30,15 +30,16 @@ l需要 apache APR APR-util、prce
  2./configure --prefix=/usr/local/php  --with-apxs2=/usr/local/apache/bin/apxs
  yum install libxml2  yum install libxml2-devel
  编译：make编译测试：make test编译安装：make install
- 谨记:在/etc 添加php配置文件 php.ini，php.ini是 php-development.ini 在/root/php-7.3.3/存在 在ect/profile  php.ini 默认在 	/usr/local/php/lib/php.ini 添加环境变量 export PATH=$PATH:/usr/local/php/bin 添加在/usr/local/php/lib/php.ini
+ 谨记:在/etc 添加php配置文件 php.ini，php.ini是 php-development.ini 在/root/php-7.3.3/存在   php.ini 默认在 	/usr/local/php/lib/php.ini 添加环境变量 export PATH=$PATH:/usr/local/php/bin 添加在/usr/local/php/lib/php.ini
  配置php-mysqli扩展
  进入PHP源代码目录：# cd /root/php-7.3.3
  再进入要添加的mysqli扩展源码目录：# cd ext/mysqli/
- 调用已经编译好的php里面的phpize：# /usr/local/php/bin/phpize(可能会报错根据错误百度下载相应的yum 包)
- configure：# ./configure --with-php-config=/usr/local/php/bin/php-config --with-mysqli=/usr/local/MySQL/bin/mysql_config（/usr/local/mysql 为mysql的安装目录）
+ 调用已经编译好的php里面的phpize：# /usr/local/php/bin/phpize(可能会报错根据错误百度yum相应的包)
+ 配置 ./configure --with-php-config=/usr/local/php/bin/php-config --with-mysqli=/usr/local/MySQL/bin/mysql_config（/usr/local/mysql 为mysql的安装目录）
 make 会报错
-找不到mysql_config yum install mysql-devel
-error: ext/mysqlnd/mysql_float_to_double.h: No such file or directory
+1找不到mysql_config 
+解决 yum install mysql-devel
+2error: ext/mysqlnd/mysql_float_to_double.h: No such file or directory
 解决 修改 /ext/mysqlnd/mysql_float_to_double.h 路径为自己目录的路径    /root/php-7.3.3/ext/mysqlnd/mysql_float_to_double.h
 make 
 make install
