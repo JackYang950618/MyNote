@@ -7,3 +7,7 @@
 1连接mysql mysql -u用户名 -p;
 2 use 要导入数据库名
 3 soucre 要导入文件的路径
+ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock'
+创建软连接
+1 find / -name mysql.sock
+ln -s /tmp/mysql.sock /var/lib/mysql/mysql.sock
