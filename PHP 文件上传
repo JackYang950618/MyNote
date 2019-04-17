@@ -1,0 +1,4 @@
+1 form表单 
+2 method=post 
+3 enctype="multipart/form-data"
+input type=file name="myF1ile"（一定要加）
