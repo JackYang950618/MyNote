@@ -22,3 +22,29 @@ function setDataToUrl($url,$data){
     $sFile = file_get_contents($url, false, $cxContext);
     print_r($sFile);
 }
+
+
+
+
+  字符串的截取方式
+ 1 strstr(string,string) = strchr(,) //从前面第一次出现某个字符串的地方截取到最后
+
+  2、strrchr(string,string) //从某个字符串从最后出现的位置截取到结尾
+
+  3、strpos(string,string[,int]) //某个字符串第一次出现的位置
+
+   4、strrpos(string,string) //某个字符串最后一次出现的位置
+
+   5、substr(string,int[,int]) //从指定位置开始截取字符串，可以指定截取的长度。
+
+   6、strlen(string) //获取字符串的长度
+   
+   $url=$_GET['url'];//Fiels/test.pptx
+   //目的获取文件真实名 test
+//$firstinde "/"第一次出现的位置
+$firstindex=strpos($url,"/");
+//lastIndex "."最后一次出现的位置
+$lastIndex=strrpos($url,".");
+//从指定位置开始截取字符串，可以指定截取的长度。
+长度就是总长度减去lastIndex再减去1
+$name=substr($url,$firstindex+1,strlen($url)-$lastIndex-1);
