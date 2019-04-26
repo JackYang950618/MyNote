@@ -1,6 +1,6 @@
 需要配置 jdk tomcat mysql
 安装时使用 tar -zxvf 压缩文件 (根据压缩包的格式)
-1安装jdk yumsearch java|grep jdk   /选择1.7版本进行安装[root@localhost ~]#yuminstalljava-1.7.0-openjdk 
+1安装jdk yumsearch java|grep jdk   /选择1.7版本进行安装[root@localhost ~]#yum install java-1.7.0-openjdk 
 /安装完之后，默认的安装目录是在: /usr/lib/jvm/java-1.7.0-openjdk-1.7.0.75.x86_64
 [root@localhost ~]#vi/etc/profile 
 #set java environment
