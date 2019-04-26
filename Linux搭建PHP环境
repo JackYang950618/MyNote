@@ -43,3 +43,6 @@ make 会报错
 解决 修改 /ext/mysqlnd/mysql_float_to_double.h 路径为自己目录的路径    /root/php-7.3.3/ext/mysqlnd/mysql_float_to_double.h
 make 
 make install
+
+编译ssh2
+./configure --prefix=/usr/local/ssh2 --with-ssh2=/usr/local/libssh2 --with-php-config=/usr/local/php/bin/php-config
