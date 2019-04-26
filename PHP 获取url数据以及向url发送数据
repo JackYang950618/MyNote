@@ -1,12 +1,22 @@
-//获取url数据
+//获取url数据(证书安全)
 function getContentFromUrl($url){
     $html=file_get_contents($url);
     return $html;
 //    print_r($http_response_header);
 }
 
-
-//向url数据发送数据
+ 在服务器端需要配置openssl扩展服务
+ //获取url数据(证书不安全)
+ $arrContextOptions=array(
+    "ssl"=>array(
+        "verify_peer"=>false,
+        "verify_peer_name"=>false,
+    ),
+);
+$html=file_get_contents("https://edi.jd-link.cn/Api/GetToken?userName=admin&password=001",false,stream_context_create($arrContextOptions));
+print_r($html);
+ 
+//向url数据发送数据（证书安全）
 function setDataToUrl($url,$data){
     $opts = array(
         'http'=>array(
@@ -22,7 +32,30 @@ function setDataToUrl($url,$data){
     $sFile = file_get_contents($url, false, $cxContext);
     print_r($sFile);
 }
+//向url数据发送数据（证书不安全）
+function setDataToUrl($url,$data){
+//    exec('wget -O /local/destination/folder/filename.tar.gz www.domain.com/files/filename.tar.gz --no-check-certificate');
 
+    $opts = array(
+        'http'=>array(
+            'method'=>"POST",
+            'header'=>"Content-type: application/x-www-form-urlencoded\r\n".
+                "Content-length:".strlen($data)."\r\n" .
+                "Cookie: foo=bar\r\n" .
+                "\r\n",
+            'content' => $data,
+
+        ),
+            "ssl"=>array(
+                "verify_peer"=>false,
+                "verify_peer_name"=>false,
+            ),
+
+    );
+    $cxContext = stream_context_create($opts);
+    $sFile = file_get_contents($url, false, $cxContext);
+    print_r($sFile);
+}
 
 
 
