@@ -81,3 +81,6 @@ $lastIndex=strrpos($url,".");
 //从指定位置开始截取字符串，可以指定截取的长度。
 长度就是总长度减去lastIndex再减去1
 $name=substr($url,$firstindex+1,strlen($url)-$lastIndex-1);
+
+对象转数组再转成json
+obj=>(array)(obj)
