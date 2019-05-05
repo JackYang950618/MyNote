@@ -83,4 +83,5 @@ $lastIndex=strrpos($url,".");
 $name=substr($url,$firstindex+1,strlen($url)-$lastIndex-1);
 
 对象转数组再转成json
-obj=>(array)(obj)
+obj=>(array)(obj) 再json_encode
+
