@@ -1,0 +1,9 @@
+1 找到自己的apaceh用户组名 vi /etc/httpd/conf/httpd.conf
+2#chown -R apache:apache your_folder
+#chmod -R 755 your_folder
+3 vim /etc/sudoers
+root    ALL=(ALL)       ALL
+daemon ALL=(ALL)       NOPASSWD:ALL（修改）
+#Defaults    requiretty（注释这句话）
+命令行:$command="sudo ..."
+
