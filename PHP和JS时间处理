@@ -1,0 +1,7 @@
+Js
+ var date = new Date().getTime();//获取时间戳
+ 
+ 传到php 
+ 时间戳=date/1000
+ 转化成时间
+ date("Y-m-d H:i:s",date/1000);
